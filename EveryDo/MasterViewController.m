@@ -10,8 +10,9 @@
 #import "DetailViewController.h"
 #import "Todo.h"
 #import "TodoTableViewCell.h"
+#import "AddItemViewController.h"
 
-@interface MasterViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface MasterViewController () <UITableViewDataSource, UITableViewDelegate, AddItemViewControllerDelegate>
 
 @property (nonatomic, strong) NSMutableArray *todoList;
 @property (nonatomic, strong) NSIndexPath* currentlySelectedIndex;
@@ -57,9 +58,6 @@
     self.todoList = [NSMutableArray arrayWithObjects:item1,item2,item3,item4,item5, nil];
 
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
-
-    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
-    self.navigationItem.rightBarButtonItem = addButton;
 }
 
 
@@ -77,6 +75,7 @@
     if (!self.todoList) {
         self.todoList = [[NSMutableArray alloc] init];
     }
+    
     [self.todoList insertObject:[NSDate date] atIndex:0];
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
     [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
@@ -91,6 +90,19 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
+-(void)addItemViewController:(AddItemViewController *)controller addItem:(Todo *)item {
+    
+    [self.todoList addObject:item];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:([self.todoList count] - 1) inSection:0];
+    [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+-(void)addItemViewControllerDidCancel:(AddItemViewController *)controller {
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 
 
 #pragma mark - Segues
@@ -102,6 +114,12 @@
         
         DetailViewController *controller = segue.destinationViewController;
         [controller setDetailItem:item];
+    }
+    
+    if ([segue.identifier isEqualToString:@"AddPlayer"]) {
+        UINavigationController *navigationController = segue.destinationViewController;
+        AddItemViewController *addItemVC = [navigationController viewControllers][0];
+        addItemVC.delegate = self;
     }
 }
 

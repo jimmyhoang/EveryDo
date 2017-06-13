@@ -17,6 +17,7 @@
 		FF1758171EF05CE20048B88C /* EveryDoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FF1758161EF05CE20048B88C /* EveryDoTests.m */; };
 		FF1758231EF05DA50048B88C /* Todo.m in Sources */ = {isa = PBXBuildFile; fileRef = FF1758221EF05DA50048B88C /* Todo.m */; };
 		FF1758261EF0602D0048B88C /* TodoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FF1758251EF0602D0048B88C /* TodoTableViewCell.m */; };
+		FF1758291EF07FF50048B88C /* AddItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FF1758281EF07FF50048B88C /* AddItemViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,8 @@
 		FF1758221EF05DA50048B88C /* Todo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Todo.m; sourceTree = "<group>"; };
 		FF1758241EF0602D0048B88C /* TodoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TodoTableViewCell.h; sourceTree = "<group>"; };
 		FF1758251EF0602D0048B88C /* TodoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TodoTableViewCell.m; sourceTree = "<group>"; };
+		FF1758271EF07FF50048B88C /* AddItemViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddItemViewController.h; sourceTree = "<group>"; };
+		FF1758281EF07FF50048B88C /* AddItemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddItemViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +101,8 @@
 				FF1758031EF05CE20048B88C /* DetailViewController.m */,
 				FF1758241EF0602D0048B88C /* TodoTableViewCell.h */,
 				FF1758251EF0602D0048B88C /* TodoTableViewCell.m */,
+				FF1758271EF07FF50048B88C /* AddItemViewController.h */,
+				FF1758281EF07FF50048B88C /* AddItemViewController.m */,
 				FF1758211EF05DA50048B88C /* Todo.h */,
 				FF1758221EF05DA50048B88C /* Todo.m */,
 				FF1758051EF05CE20048B88C /* Main.storyboard */,
@@ -232,6 +237,7 @@
 			files = (
 				FF1758231EF05DA50048B88C /* Todo.m in Sources */,
 				FF1758261EF0602D0048B88C /* TodoTableViewCell.m in Sources */,
+				FF1758291EF07FF50048B88C /* AddItemViewController.m in Sources */,
 				FF1757FE1EF05CE20048B88C /* AppDelegate.m in Sources */,
 				FF1758011EF05CE20048B88C /* MasterViewController.m in Sources */,
 				FF1757FB1EF05CE20048B88C /* main.m in Sources */,
