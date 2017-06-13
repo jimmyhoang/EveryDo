@@ -26,13 +26,13 @@
     
     Todo* item1 = [[Todo alloc] init];
     item1.title = @"Buy Milk";
-    item1.todoDescription = @"Buy some milk from the store";
+    item1.todoDescription = @"Go to the store and buy some milk";
     item1.priorityNumber = 2;
     item1.isCompletedIndicator = NO;
     
     Todo* item2 = [[Todo alloc] init];
     item2.title = @"Buy Cookies";
-    item2.todoDescription = @"Buy some cookies from the store";
+    item2.todoDescription = @"Purchase some delicious cookies from the grocery mart";
     item2.priorityNumber = 4;
     item2.isCompletedIndicator = NO;
     
@@ -82,15 +82,26 @@
     [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
+#pragma mark - Delegate
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    self.currentlySelectedIndex = indexPath;
+    
+    [self performSegueWithIdentifier:@"showDetail" sender:self];
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+
 
 #pragma mark - Segues
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([[segue identifier] isEqualToString:@"showDetail"]) {
-        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        NSDate *object = self.todoList[indexPath.row];
-        DetailViewController *controller = (DetailViewController *)[segue destinationViewController];
-        [controller setDetailItem:object];
+    
+    if ([segue.identifier isEqualToString:@"showDetail"]) {
+        Todo* item = self.todoList[self.currentlySelectedIndex.row];
+        
+        DetailViewController *controller = segue.destinationViewController;
+        [controller setDetailItem:item];
     }
 }
 
@@ -135,12 +146,6 @@
     }
 }
 
-#pragma mark - Delegate
-
--(Todo *)passTodoItem {
-    Todo* itemToBeDisplayed = self.todoList[self.currentlySelectedIndex.row];
-    return itemToBeDisplayed;
-}
 
 
 @end

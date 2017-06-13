@@ -86,7 +86,10 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iFc-cX-pPT" userLabel="Description">
-                                            <rect key="frame" x="8" y="31" width="65" height="15"/>
+                                            <rect key="frame" x="8" y="31" width="60" height="15"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="60" id="LVq-Ea-3cQ"/>
+                                            </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -114,7 +117,6 @@
                                     <outlet property="descriptionLabel" destination="iFc-cX-pPT" id="Uma-KA-kdf"/>
                                     <outlet property="priorityLabel" destination="rev-hl-N8v" id="hB0-Ov-7od"/>
                                     <outlet property="todoItemLabel" destination="7s7-yA-ua2" id="iBz-NZ-6Bh"/>
-                                    <segue destination="JEX-9P-axG" kind="show" identifier="showDetail" id="3g5-t3-D5n"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -125,6 +127,9 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Master" id="Zdf-7t-Un8"/>
+                    <connections>
+                        <segue destination="JEX-9P-axG" kind="show" identifier="showDetail" id="cnw-gY-0na"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rux-fX-hf1" sceneMemberID="firstResponder"/>
             </objects>
