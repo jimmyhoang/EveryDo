@@ -58,6 +58,9 @@
     self.todoList = [NSMutableArray arrayWithObjects:item1,item2,item3,item4,item5, nil];
 
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
+    
+    UISwipeGestureRecognizer* swipeGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(crossOffItem:)];
+    [self.tableView addGestureRecognizer:swipeGesture];
 }
 
 
@@ -80,6 +83,18 @@
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
     [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
+
+#pragma mark - Swipe Gesture Action
+
+-(void)crossOffItem:(UISwipeGestureRecognizer*)sender {
+    CGPoint location = [sender locationInView:self.tableView];
+    NSIndexPath* indexPath = [self.tableView indexPathForRowAtPoint:location];
+    
+    Todo* itemToBeCrossed = self.todoList[indexPath.row];
+    itemToBeCrossed.isCompletedIndicator = YES;
+    [self.tableView reloadData];
+}
+
 
 #pragma mark - Delegate
 
