@@ -14,8 +14,10 @@
 
 @interface MasterViewController () <UITableViewDataSource, UITableViewDelegate, AddItemViewControllerDelegate>
 
-@property (nonatomic, strong) NSMutableArray *todoList;
+@property (nonatomic, strong) NSMutableArray* todoList;
+@property (nonatomic, strong) NSMutableArray* completedList;
 @property (nonatomic, strong) NSIndexPath* currentlySelectedIndex;
+@property (nonatomic, assign) NSInteger currentSection;
 @end
 
 @implementation MasterViewController
@@ -23,7 +25,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    
     
     Todo* item1 = [[Todo alloc] init];
     item1.title = @"Buy Milk";
@@ -87,6 +88,14 @@
     
     Todo* itemToBeCrossed = self.todoList[indexPath.row];
     itemToBeCrossed.isCompletedIndicator = YES;
+    
+    if (!self.completedList) {
+        self.completedList = [[NSMutableArray alloc] initWithObjects:itemToBeCrossed, nil];
+    } else {
+        [self.completedList addObject:itemToBeCrossed];
+    }
+
+    [self.todoList removeObject:itemToBeCrossed];
     [self.tableView reloadData];
 }
 
@@ -95,6 +104,7 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     self.currentlySelectedIndex = indexPath;
+    self.currentSection = indexPath.section;
     
     [self performSegueWithIdentifier:@"showDetail" sender:self];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -120,10 +130,24 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
     if ([segue.identifier isEqualToString:@"showDetail"]) {
-        Todo* item = self.todoList[self.currentlySelectedIndex.row];
         
-        DetailViewController *controller = segue.destinationViewController;
-        [controller setDetailItem:item];
+        switch (self.currentSection) {
+            case 0:
+            {
+                Todo* item = self.todoList[self.currentlySelectedIndex.row];
+                DetailViewController *controller = segue.destinationViewController;
+                [controller setDetailItem:item];
+                break;
+            }
+            case 1:
+            {
+                Todo* item = self.completedList[self.currentlySelectedIndex.row];
+                DetailViewController *controller = segue.destinationViewController;
+                [controller setDetailItem:item];
+                break;
+            }
+        }
+
     }
     
     if ([segue.identifier isEqualToString:@"AddPlayer"]) {
@@ -137,23 +161,53 @@
 #pragma mark - Table View
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+    return 2;
 }
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.todoList.count;
+    
+    if (section == 0) {
+        return self.todoList.count;
+    }
+    
+    if (section == 1) {
+        return self.completedList.count;
+    }
+    
+    return 0;
+    
 }
 
 
 - (TodoTableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     TodoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
-    Todo* item = self.todoList[indexPath.row];
     
-    cell.descriptionLabel.text = item.todoDescription;
-    cell.todoItemLabel.text = item.title;
-    cell.priorityLabel.text = [NSString stringWithFormat:@"%li",(long)item.priorityNumber];
-    cell.isCompleted = item.isCompletedIndicator;
+    switch (indexPath.section) {
+        case 0:
+        {
+            Todo* item = self.todoList[indexPath.row];
+            cell.descriptionLabel.text = item.todoDescription;
+            cell.todoItemLabel.text = item.title;
+            cell.priorityLabel.text = [NSString stringWithFormat:@"%li",(long)item.priorityNumber];
+            cell.isCompleted = item.isCompletedIndicator;
+            break;
+        }
+        case 1:
+        {
+            if (!self.completedList) {
+                break;
+            } else {
+                Todo* item = self.completedList[indexPath.row];
+                cell.descriptionLabel.text = item.todoDescription;
+                cell.todoItemLabel.text = item.title;
+                cell.priorityLabel.text = [NSString stringWithFormat:@"%li",(long)item.priorityNumber];
+                cell.isCompleted = item.isCompletedIndicator;
+                break;
+            }
+
+        }
+    }
     
     return cell;
 }
@@ -179,11 +233,35 @@
 }
 
 -(void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath {
-    Todo* itemToMove = [self.todoList objectAtIndex:sourceIndexPath.row];
-    [self.todoList removeObjectAtIndex:sourceIndexPath.row];
-    [self.todoList insertObject:itemToMove atIndex:destinationIndexPath.row];
+    switch (sourceIndexPath.section) {
+        case 0:
+        {
+            Todo* itemToMove = [self.todoList objectAtIndex:sourceIndexPath.row];
+            [self.todoList removeObjectAtIndex:sourceIndexPath.row];
+            [self.todoList insertObject:itemToMove atIndex:destinationIndexPath.row];
+        }
+        case 1:
+        {
+            Todo* itemToMove = [self.completedList objectAtIndex:sourceIndexPath.row];
+            [self.completedList removeObjectAtIndex:sourceIndexPath.row];
+            [self.completedList insertObject:itemToMove atIndex:destinationIndexPath.row];
+        }
+    }
+    
+
     
 }
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    if (section == 0) {
+        return @"Outstanding Items";
+    } else if (section == 1) {
+        return @"Completed Items";
+    } else {
+        return @"";
+    }
+}
+
 
 
 @end
