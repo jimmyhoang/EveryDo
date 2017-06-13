@@ -8,10 +8,13 @@
 
 #import "MasterViewController.h"
 #import "DetailViewController.h"
+#import "Todo.h"
+#import "TodoTableViewCell.h"
 
-@interface MasterViewController ()
+@interface MasterViewController () <UITableViewDataSource, UITableViewDelegate>
 
-@property NSMutableArray *objects;
+@property (nonatomic, strong) NSMutableArray *todoList;
+@property (nonatomic, strong) NSIndexPath* currentlySelectedIndex;
 @end
 
 @implementation MasterViewController
@@ -19,6 +22,40 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    
+    
+    Todo* item1 = [[Todo alloc] init];
+    item1.title = @"Buy Milk";
+    item1.todoDescription = @"Buy some milk from the store";
+    item1.priorityNumber = 2;
+    item1.isCompletedIndicator = NO;
+    
+    Todo* item2 = [[Todo alloc] init];
+    item2.title = @"Buy Cookies";
+    item2.todoDescription = @"Buy some cookies from the store";
+    item2.priorityNumber = 4;
+    item2.isCompletedIndicator = NO;
+    
+    Todo* item3 = [[Todo alloc] init];
+    item3.title = @"Wash the car";
+    item3.todoDescription = @"Wash the car real good";
+    item3.priorityNumber = 3;
+    item3.isCompletedIndicator = NO;
+    
+    Todo* item4 = [[Todo alloc] init];
+    item4.title = @"Buy new clothes";
+    item4.todoDescription = @"Hit up the mall and find some new swag";
+    item4.priorityNumber = 1;
+    item4.isCompletedIndicator = NO;
+    
+    Todo* item5 = [[Todo alloc] init];
+    item5.title = @"Walk the dog";
+    item5.todoDescription = @"Walk little J";
+    item5.priorityNumber = 1;
+    item5.isCompletedIndicator = NO;
+    
+    self.todoList = [NSMutableArray arrayWithObjects:item1,item2,item3,item4,item5, nil];
+
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
 
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
@@ -37,10 +74,10 @@
 
 
 - (void)insertNewObject:(id)sender {
-    if (!self.objects) {
-        self.objects = [[NSMutableArray alloc] init];
+    if (!self.todoList) {
+        self.todoList = [[NSMutableArray alloc] init];
     }
-    [self.objects insertObject:[NSDate date] atIndex:0];
+    [self.todoList insertObject:[NSDate date] atIndex:0];
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
     [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
@@ -51,7 +88,7 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([[segue identifier] isEqualToString:@"showDetail"]) {
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        NSDate *object = self.objects[indexPath.row];
+        NSDate *object = self.todoList[indexPath.row];
         DetailViewController *controller = (DetailViewController *)[segue destinationViewController];
         [controller setDetailItem:object];
     }
@@ -66,15 +103,19 @@
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.objects.count;
+    return self.todoList.count;
 }
 
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
-
-    NSDate *object = self.objects[indexPath.row];
-    cell.textLabel.text = [object description];
+- (TodoTableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    TodoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
+    Todo* item = self.todoList[indexPath.row];
+    
+    cell.descriptionLabel.text = item.todoDescription;
+    cell.todoItemLabel.text = item.title;
+    cell.priorityLabel.text = [NSString stringWithFormat:@"%li",(long)item.priorityNumber];
+    cell.isCompleted = item.isCompletedIndicator;
+    
     return cell;
 }
 
@@ -87,11 +128,18 @@
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        [self.objects removeObjectAtIndex:indexPath.row];
+        [self.todoList removeObjectAtIndex:indexPath.row];
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
     } else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
     }
+}
+
+#pragma mark - Delegate
+
+-(Todo *)passTodoItem {
+    Todo* itemToBeDisplayed = self.todoList[self.currentlySelectedIndex.row];
+    return itemToBeDisplayed;
 }
 
 

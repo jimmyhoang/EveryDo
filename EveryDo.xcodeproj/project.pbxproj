@@ -15,6 +15,8 @@
 		FF1758091EF05CE20048B88C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FF1758081EF05CE20048B88C /* Assets.xcassets */; };
 		FF17580C1EF05CE20048B88C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FF17580A1EF05CE20048B88C /* LaunchScreen.storyboard */; };
 		FF1758171EF05CE20048B88C /* EveryDoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FF1758161EF05CE20048B88C /* EveryDoTests.m */; };
+		FF1758231EF05DA50048B88C /* Todo.m in Sources */ = {isa = PBXBuildFile; fileRef = FF1758221EF05DA50048B88C /* Todo.m */; };
+		FF1758261EF0602D0048B88C /* TodoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FF1758251EF0602D0048B88C /* TodoTableViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +45,10 @@
 		FF1758121EF05CE20048B88C /* EveryDoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EveryDoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF1758161EF05CE20048B88C /* EveryDoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EveryDoTests.m; sourceTree = "<group>"; };
 		FF1758181EF05CE20048B88C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FF1758211EF05DA50048B88C /* Todo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Todo.h; sourceTree = "<group>"; };
+		FF1758221EF05DA50048B88C /* Todo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Todo.m; sourceTree = "<group>"; };
+		FF1758241EF0602D0048B88C /* TodoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TodoTableViewCell.h; sourceTree = "<group>"; };
+		FF1758251EF0602D0048B88C /* TodoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TodoTableViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +96,10 @@
 				FF1758001EF05CE20048B88C /* MasterViewController.m */,
 				FF1758021EF05CE20048B88C /* DetailViewController.h */,
 				FF1758031EF05CE20048B88C /* DetailViewController.m */,
+				FF1758241EF0602D0048B88C /* TodoTableViewCell.h */,
+				FF1758251EF0602D0048B88C /* TodoTableViewCell.m */,
+				FF1758211EF05DA50048B88C /* Todo.h */,
+				FF1758221EF05DA50048B88C /* Todo.m */,
 				FF1758051EF05CE20048B88C /* Main.storyboard */,
 				FF1757F91EF05CE20048B88C /* Supporting Files */,
 			);
@@ -220,6 +230,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FF1758231EF05DA50048B88C /* Todo.m in Sources */,
+				FF1758261EF0602D0048B88C /* TodoTableViewCell.m in Sources */,
 				FF1757FE1EF05CE20048B88C /* AppDelegate.m in Sources */,
 				FF1758011EF05CE20048B88C /* MasterViewController.m in Sources */,
 				FF1757FB1EF05CE20048B88C /* main.m in Sources */,
