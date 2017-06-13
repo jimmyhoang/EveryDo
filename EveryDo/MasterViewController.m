@@ -30,30 +30,35 @@
     item1.todoDescription = @"Go to the store and buy some milk";
     item1.priorityNumber = 2;
     item1.isCompletedIndicator = NO;
+    item1.deadline = [NSDate date];
     
     Todo* item2 = [[Todo alloc] init];
     item2.title = @"Buy Cookies";
     item2.todoDescription = @"Purchase some delicious cookies from the grocery mart";
     item2.priorityNumber = 4;
     item2.isCompletedIndicator = NO;
+    item2.deadline = [NSDate date];
     
     Todo* item3 = [[Todo alloc] init];
     item3.title = @"Wash the car";
     item3.todoDescription = @"Wash the car real good";
     item3.priorityNumber = 3;
     item3.isCompletedIndicator = NO;
+    item3.deadline = [NSDate date];
     
     Todo* item4 = [[Todo alloc] init];
     item4.title = @"Buy new clothes";
     item4.todoDescription = @"Hit up the mall and find some new swag";
     item4.priorityNumber = 1;
     item4.isCompletedIndicator = NO;
+    item4.deadline = [NSDate date];
     
     Todo* item5 = [[Todo alloc] init];
     item5.title = @"Walk the dog";
     item5.todoDescription = @"Walk little J";
     item5.priorityNumber = 1;
     item5.isCompletedIndicator = NO;
+    item5.deadline = [NSDate date];
     
     self.todoList = [NSMutableArray arrayWithObjects:item1,item2,item3,item4,item5, nil];
 

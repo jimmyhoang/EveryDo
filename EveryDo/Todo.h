@@ -14,5 +14,7 @@
 @property (nonatomic, strong) NSString* todoDescription;
 @property (nonatomic, assign) NSInteger priorityNumber;
 @property (nonatomic, assign) BOOL isCompletedIndicator;
+@property (nonatomic, strong) NSDate* deadline;
+
 
 @end

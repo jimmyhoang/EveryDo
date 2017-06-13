@@ -30,6 +30,11 @@
     // Update the user interface for the detail item.
     if (self.detailItem) {
         self.detailDescriptionLabel.text = self.detailItem.todoDescription;
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        [formatter setFormatterBehavior:NSDateFormatterBehavior10_4];
+        [formatter setDateStyle:NSDateFormatterShortStyle];
+        [formatter setTimeStyle:NSDateFormatterNoStyle];
+        self.deadlineLabel.text = [NSString stringWithFormat:@"Deadline: %@",[formatter stringFromDate:self.detailItem.deadline]];
     }
 }
 

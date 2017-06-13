@@ -41,6 +41,7 @@
     item.title = self.titleTextField.text;
     item.todoDescription = self.descriptionTextField.text;
     item.priorityNumber = [self.priorityTextField.text integerValue];
+    item.deadline = self.deadlinePicker.date;
     
     [self.delegate addItemViewController:self addItem:item];
 }

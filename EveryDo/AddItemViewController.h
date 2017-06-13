@@ -23,6 +23,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *titleTextField;
 @property (weak, nonatomic) IBOutlet UITextField *descriptionTextField;
 @property (weak, nonatomic) IBOutlet UITextField *priorityTextField;
+@property (weak, nonatomic) IBOutlet UIDatePicker *deadlinePicker;
 
 
 - (IBAction)cancel:(id)sender;

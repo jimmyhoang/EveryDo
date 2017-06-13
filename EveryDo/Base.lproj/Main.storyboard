@@ -45,9 +45,17 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Deadline" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NEB-Bd-hXz">
+                                <rect key="frame" x="174" y="427" width="67" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="NEB-Bd-hXz" firstAttribute="centerX" secondItem="0XM-y9-sOw" secondAttribute="centerX" id="Es1-Y2-nhe"/>
+                            <constraint firstItem="NEB-Bd-hXz" firstAttribute="top" secondItem="0XM-y9-sOw" secondAttribute="bottom" constant="50" id="Swq-sV-9iL"/>
                             <constraint firstItem="0XM-y9-sOw" firstAttribute="leading" secondItem="svH-Pt-448" secondAttribute="leading" constant="20" symbolic="YES" id="Tsc-yG-G1q"/>
                             <constraint firstItem="0XM-y9-sOw" firstAttribute="centerY" secondItem="svH-Pt-448" secondAttribute="centerY" id="jWN-iV-94e"/>
                             <constraint firstAttribute="trailing" secondItem="0XM-y9-sOw" secondAttribute="trailing" constant="20" symbolic="YES" id="tHV-ZD-HQj"/>
@@ -56,6 +64,7 @@
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Detail" id="mOI-FS-AaM"/>
                     <connections>
+                        <outlet property="deadlineLabel" destination="NEB-Bd-hXz" id="MW8-uC-fDI"/>
                         <outlet property="detailDescriptionLabel" destination="0XM-y9-sOw" id="deQ-Na-JPF"/>
                     </connections>
                 </viewController>
@@ -150,6 +159,39 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
+                            <tableViewSection headerTitle="Deadline" id="1VQ-mD-seE">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="200" id="4Fy-Fs-MFR">
+                                        <rect key="frame" x="0.0" y="359" width="414" height="200"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="4Fy-Fs-MFR" id="OfN-UG-NkO">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="199"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sdk-h0-rZi">
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="199"/>
+                                                    <nil key="textColor"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                                </textField>
+                                                <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="p5S-It-cRl">
+                                                    <rect key="frame" x="0.0" y="-17" width="414" height="216"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                                    <date key="date" timeIntervalSinceReferenceDate="519081956.68300402">
+                                                        <!--2017-06-13 21:25:56 +0000-->
+                                                    </date>
+                                                </datePicker>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="sdk-h0-rZi" firstAttribute="top" secondItem="OfN-UG-NkO" secondAttribute="top" id="Kfc-YO-kDn"/>
+                                                <constraint firstItem="sdk-h0-rZi" firstAttribute="leading" secondItem="OfN-UG-NkO" secondAttribute="leading" id="ZxV-En-8ZM"/>
+                                                <constraint firstAttribute="trailing" secondItem="sdk-h0-rZi" secondAttribute="trailing" id="l0V-TP-rci"/>
+                                                <constraint firstAttribute="bottom" secondItem="sdk-h0-rZi" secondAttribute="bottom" id="qNr-9O-RPf"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
                         </sections>
                         <connections>
                             <outlet property="dataSource" destination="ypK-mg-7XT" id="Ydp-W5-lyA"/>
@@ -169,6 +211,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="deadlinePicker" destination="p5S-It-cRl" id="ZHW-dk-b9W"/>
                         <outlet property="descriptionTextField" destination="mhH-gG-1Xh" id="bNy-Fd-iBo"/>
                         <outlet property="priorityTextField" destination="HS5-2T-lSg" id="SyJ-Ur-1vU"/>
                         <outlet property="titleTextField" destination="jQC-KK-LPt" id="SqV-IQ-ekw"/>

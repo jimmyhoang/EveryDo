@@ -13,6 +13,7 @@
 
 @property (strong, nonatomic) Todo* detailItem;
 @property (weak, nonatomic) IBOutlet UILabel *detailDescriptionLabel;
+@property (weak, nonatomic) IBOutlet UILabel *deadlineLabel;
 
 @end
 
