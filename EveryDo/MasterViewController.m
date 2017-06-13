@@ -60,6 +60,7 @@
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
     
     UISwipeGestureRecognizer* swipeGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(crossOffItem:)];
+    swipeGesture.direction = UISwipeGestureRecognizerDirectionRight;
     [self.tableView addGestureRecognizer:swipeGesture];
 }
 
@@ -71,17 +72,6 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-
-- (void)insertNewObject:(id)sender {
-    if (!self.todoList) {
-        self.todoList = [[NSMutableArray alloc] init];
-    }
-    
-    [self.todoList insertObject:[NSDate date] atIndex:0];
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-    [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
 #pragma mark - Swipe Gesture Action
@@ -179,6 +169,16 @@
     }
 }
 
+-(BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
+}
+
+-(void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath {
+    Todo* itemToMove = [self.todoList objectAtIndex:sourceIndexPath.row];
+    [self.todoList removeObjectAtIndex:sourceIndexPath.row];
+    [self.todoList insertObject:itemToMove atIndex:destinationIndexPath.row];
+    
+}
 
 
 @end
