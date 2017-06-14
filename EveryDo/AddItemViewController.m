@@ -16,12 +16,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
+    // Tap gesture recognizer to dismiss keyboard
+    UITapGestureRecognizer* tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard:)];
+    [self.view addGestureRecognizer:tapGesture];
     
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -29,8 +29,13 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - Buttons
+#pragma mark - Tap Gesture Action
 
+-(void)dismissKeyboard:(UITapGestureRecognizer*)sender {
+    [self.view endEditing:YES];
+}
+
+#pragma mark - Buttons
 - (IBAction)cancel:(id)sender {
     [self.delegate addItemViewControllerDidCancel:self];
 }
