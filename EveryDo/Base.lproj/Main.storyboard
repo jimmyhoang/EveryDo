@@ -300,7 +300,19 @@
                             <outlet property="delegate" destination="7bK-jq-Zjz" id="RA6-mI-bju"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Master" id="Zdf-7t-Un8">
+                    <navigationItem key="navigationItem" id="Zdf-7t-Un8">
+                        <nil key="title"/>
+                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="Flm-Sm-oWd">
+                            <rect key="frame" x="124.5" y="7" width="165" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <segments>
+                                <segment title="Priority"/>
+                                <segment title="Deadline"/>
+                            </segments>
+                            <connections>
+                                <action selector="segmentedButton:" destination="7bK-jq-Zjz" eventType="valueChanged" id="tDz-h7-9QA"/>
+                            </connections>
+                        </segmentedControl>
                         <barButtonItem key="rightBarButtonItem" style="plain" systemItem="add" id="8zV-d7-OX0">
                             <connections>
                                 <segue destination="Lk1-R6-Pe1" kind="presentation" identifier="AddPlayer" id="iVA-vf-Rwy"/>

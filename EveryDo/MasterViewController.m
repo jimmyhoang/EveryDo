@@ -262,6 +262,22 @@
     }
 }
 
+#pragma mark - Segmented Button Action
+- (IBAction)segmentedButton:(UISegmentedControl*)sender {
+    NSString* key;
+    
+    if (sender.selectedSegmentIndex == 0) {
+        key = @"priorityNumber";
+    } else {
+        key = @"deadline";
+    }
+    NSSortDescriptor* sortDescriptor = [[NSSortDescriptor alloc] initWithKey:key ascending:YES];
+    NSArray* sortedArray = [self.todoList sortedArrayUsingDescriptors:@[sortDescriptor]];
+    
+    self.todoList = [NSMutableArray arrayWithArray:sortedArray];
+    [self.tableView reloadData];   
+}
+
 
 
 @end
