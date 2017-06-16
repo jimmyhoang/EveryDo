@@ -24,10 +24,34 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+    // Call prepareDataSource for example todo list items
+    self.todoList = [self prepareDataSource];
+
+    // Add edit button
+    self.navigationItem.leftBarButtonItem = self.editButtonItem;
     
+    // Swipe gesture recognizer to mark an item as complete
+    UISwipeGestureRecognizer* swipeGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(crossOffItem:)];
+    swipeGesture.direction = UISwipeGestureRecognizerDirectionRight;
+    [self.tableView addGestureRecognizer:swipeGesture];
     
-    // Declare example todo list items
+}
+
+
+- (void)viewWillAppear:(BOOL)animated {
+}
+
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - Helpers
+
+-(NSMutableArray*)prepareDataSource {
+    NSMutableArray* dataSource = [[NSMutableArray alloc] init];
+    
     Todo* item1 = [[Todo alloc] init];
     item1.title = @"Buy Milk";
     item1.todoDescription = @"Go to the store and buy some milk";
@@ -63,27 +87,8 @@
     item5.isCompletedIndicator = NO;
     item5.deadline = [NSDate date];
     
-    // Add items to todolist array to be presented on table view
-    self.todoList = [NSMutableArray arrayWithObjects:item1,item2,item3,item4,item5, nil];
-
-    // Add edit button
-    self.navigationItem.leftBarButtonItem = self.editButtonItem;
-    
-    // Swipe gesture recognizer to mark an item as complete
-    UISwipeGestureRecognizer* swipeGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(crossOffItem:)];
-    swipeGesture.direction = UISwipeGestureRecognizerDirectionRight;
-    [self.tableView addGestureRecognizer:swipeGesture];
-    
-}
-
-
-- (void)viewWillAppear:(BOOL)animated {
-}
-
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    dataSource = [NSMutableArray arrayWithObjects:item1,item2,item3,item4,item5, nil];
+    return dataSource;
 }
 
 #pragma mark - Swipe Gesture Action
@@ -100,7 +105,7 @@
     // Mark as complete
     itemToBeCrossed.isCompletedIndicator = YES;
     
-    // If completedList isn't initialized yet, intialize it. if not just add new item to the list
+   // If completedList isn't initialized yet, intialize it. if not just add new item to the list
     if (!self.completedList) {
         self.completedList = [[NSMutableArray alloc] initWithObjects:itemToBeCrossed, nil];
     } else {
@@ -136,8 +141,6 @@
     
     [self dismissViewControllerAnimated:YES completion:nil];
 }
-
-
 
 #pragma mark - Segues
 
